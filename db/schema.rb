@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 5) do
     t.string "last_name"
     t.string "email"
     t.string "password_digest"
+    t.integer "trainer_id"
   end
 
   create_table "exercise_plans", force: :cascade do |t|

@@ -5,6 +5,7 @@ class CreateClients < ActiveRecord::Migration[4.2]
       t.string :last_name
       t.string :email
       t.string :password_digest
+      t.integer :trainer_id
     end
   end
 end
