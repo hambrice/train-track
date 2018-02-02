@@ -6,6 +6,7 @@ class CreateExercises < ActiveRecord::Migration[4.2]
       t.integer :sets
       t.integer :reps
       t.string :schedule
+      t.string :body_region
     end
   end
 end

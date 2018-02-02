@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 5) do
     t.integer "sets"
     t.integer "reps"
     t.string "schedule"
+    t.string "body_region"
   end
 
   create_table "plans", force: :cascade do |t|
