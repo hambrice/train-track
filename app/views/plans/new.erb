@@ -1,8 +1,15 @@
+<% if session[:client_id] != nil %>
+<h2> You are building a new track for <%=Client.find(session[:client_id]).name %></h2>
+<% else %>
+<h2> You are building a new unassigned track </h2>
+<% end %>
+
 <form method='POST' action='/plans'>
   <input type="text" name="title"> Plan Title </input>
   <br>
   <% Exercise.all.each do |exercise| %>
   <input type="checkbox" name="exercises[]" value="<%=exercise.id%>"> <%=exercise.title%> </input>
+  <br>
   <% end %>
   <br>
   <input type="submit" value="Submit">
