@@ -7,7 +7,7 @@ class ExercisesController < ApplicationController
   end
 
   post '/exercises/new' do
-    @exercise = Exercise.create(title: params["name"], description: params["description"], sets: params["sets"], reps: params["reps"], body_region: params["body_region"])
+    @exercise = Exercise.create(title: params["title"], description: params["description"], sets: params["sets"], reps: params["reps"], body_region: params["body_region"])
     redirect "/exercises/#{@exercise.id}"
   end
 
@@ -22,7 +22,8 @@ class ExercisesController < ApplicationController
   end
 
   patch '/exercises/:id' do
-    @exercise = Exercise.update((title: params["name"], description: params["description"], sets: params["sets"], reps: params["reps"], body_region: params["body_region"])
+    @exercise = Exercise.find(params[:id])
+    @exercise.safe_update(params)
     redirect "/exercises/#{@exercise.id}"
   end
 end

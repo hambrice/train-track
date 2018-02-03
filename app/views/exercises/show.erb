@@ -1,8 +1,10 @@
 <h2> <%= @exercise.title %> </h2>
+<p> <%= @exercise.body_region %> </p>
 <p> <%= @exercise.description %> </p>
-<p> <%=@exercise.sets%> sets of <%= @exercise.reps %> repititions </p>
+<p> <%=@exercise.sets_reps%> </p>
 <a href='/exercises/<%=@exercise.id%>/edit'> Edit this exercise </a>
 <br>
 <br>
 <a href='/exercises/new'> Add another exercise? </a>
+<br>
 <a href="/trainers/<%=session[:user_id]%>"> Return to main page </a>
