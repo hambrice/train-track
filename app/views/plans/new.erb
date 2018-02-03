@@ -2,7 +2,7 @@
   <input type="text" name="title"> Plan Title </input>
   <br>
   <% Exercise.all.each do |exercise| %>
-  <input type="checkbox" name="exercises[]" value="<%exercise.id%>"> <%=exercise.title%> </input>
+  <input type="checkbox" name="exercises[]" value="<%=exercise.id%>"> <%=exercise.title%> </input>
   <% end %>
   <br>
   <input type="submit" value="Submit">
