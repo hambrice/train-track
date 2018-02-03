@@ -28,13 +28,11 @@ end
   post '/show' do
     if Trainer.find_by(email: params["email"]) == nil
       @client = Client.find_by(email: params["email"])
-      @session = session
-      @session[:user_id] = @client.id
+      session[:user_id] = @client.id
       redirect "/clients/#{@client.id}"
     elsif Trainer.find_by(email: params["email"]) != nil
       @trainer = Trainer.find_by(email: params["email"])
-      @session = session
-      @session[:user_id] = @trainer.id
+      session[:user_id] = @trainer.id
       redirect "/trainers/#{@trainer.id}"
     end
 
