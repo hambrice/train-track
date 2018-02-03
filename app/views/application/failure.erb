@@ -1,0 +1,6 @@
+<h2> Sorry! </h2>
+<p> This page is for verified trainers working hard to keep you in shape! </p>
+<% if Client.find(session[:user_id]) != nil%>
+  <a href="/clients/<%=session[:user_id]"> Click here to return to your home page. </a>
+<% else %>
+  <a href="/login"> Click here to login. </a>

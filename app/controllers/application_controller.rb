@@ -13,6 +13,14 @@ end
     session[:user_id] != nil
   end
 
+  def trainer?
+    Trainer.find(session[:user_id]) != nil
+  end
+
+  def has_access?
+    is_logged_in? & trainer?
+  end
+
   get '/' do
     erb :'/application/index'
   end
