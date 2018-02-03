@@ -17,6 +17,12 @@ class ExercisesController < ApplicationController
   end
 
   get '/exercises/:id/edit' do
+    @exercise = Exercise.find(params[:id])
     erb :'/exercises/edit'
+  end
+
+  patch '/exercises/:id' do
+    @exercise = Exercise.update((title: params["name"], description: params["description"], sets: params["sets"], reps: params["reps"], body_region: params["body_region"])
+    redirect "/exercises/#{@exercise.id}"
   end
 end
