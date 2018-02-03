@@ -21,4 +21,8 @@ end
     erb :'/application/login'
   end
 
+  get '/signup' do
+    erb :'/application/signup'
+  end
+
 end
