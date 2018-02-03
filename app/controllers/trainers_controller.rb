@@ -5,7 +5,7 @@ class TrainersController < ApplicationController
   end
 
   post '/trainers/show' do
-    @trainer = Trainer.new(first_name: params["first_name"], last_name: params["last_name"], email: params["email"], password: params["password"])
+    @trainer = Trainer.create(first_name: params["first_name"], last_name: params["last_name"], email: params["email"], password: params["password"])
     @session = session
     @session[:user_id] = @trainer.id
     erb :'trainers/show'

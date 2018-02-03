@@ -1,12 +1,23 @@
 <h2> Welcome, <%=@trainer.first_name%> </h2>
 <% if !@trainer.clients.empty? %>
-<p> Here are your current clients </p>
-<ul>
-<% @trainer.clients.each do |client| %>
-<li> <%=client.name%> </li>
-<li> <%=client.plan.name%> </li>
-<% end %>
+  <p> Here are your current clients with plans </p>
+  <ul>
+  <% @trainer.clients.each do |client| %>
+    <% if client.plan != nil %>
+      <li> <%=client.name%> </li>
+      <li> <%=client.plan.name%> </li>
+    <% end %>
+  <% end %>
+  <p> Here are your current clients without plans </p>
+  <ul>
+  <% @trainer.clients.each do |client| %>
+    <% if client.plan != nil %>
+      <li> <%=client.name%> </li>
+      <li> Make new plan! </li>
+    <% end %>
+  <% end %>
+
 <% else %>
 <p> Oh no, you have no clients! </p>
-<p> You can add new clients by their email address by clicking here </p>
 <% end %>
+<p> You can add new clients by their email address by clicking here </p>
