@@ -8,15 +8,15 @@
       <li> <%=client.plan.name%> </li>
     <% end %>
   <% end %>
+</ul>
   <p> Here are your current clients without plans </p>
   <ul>
   <% @trainer.clients.each do |client| %>
-    <% if client.plan != nil %>
       <li> <%=client.name%> </li>
-      <li> Make new plan! </li>
-    <% end %>
+      <p> Make new plan! </p>
+      <br>
   <% end %>
-
+  </ul>
 <% else %>
 <p> Oh no, you have no clients! </p>
 <% end %>
