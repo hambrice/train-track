@@ -14,11 +14,17 @@ end
   end
 
   def trainer?
-    Trainer.find(session[:user_id]) != nil
+    session[:is_trainer] != nil
   end
 
   def has_access?
     is_logged_in? & trainer?
+  end
+
+  def check_access
+    if !has_access?
+      redirect '/failure'
+    end
   end
 
   get '/' do
@@ -41,6 +47,7 @@ end
     elsif Trainer.find_by(email: params["email"]) != nil
       @trainer = Trainer.find_by(email: params["email"])
       session[:user_id] = @trainer.id
+      session[:is_trainer] = true
       redirect "/trainers/#{@trainer.id}"
     end
 
@@ -48,6 +55,10 @@ end
 
   get '/tester' do
     erb :'/application/tester'
+  end
+
+  get '/failure' do
+    erb :'/application/failure'
   end
 
 

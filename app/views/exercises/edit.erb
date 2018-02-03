@@ -1,4 +1,9 @@
-<form method='POST' action='/exercises/new'>
+<h2> <%=@exercise.title %> </h2>
+<p> <%=@exercise.body_region%> </p>
+<p> <%=@exercise.description %> </p>
+<p> <%=@exercise.sets_reps%> </p>
+
+<form method='POST' action='/exercises/<%=@exercise.id%>'>
   <input type="text" name="name"> Exercise Title </input>
   <br>
   <input type="text" name="description"> Exercise Instructions </input>
@@ -8,5 +13,6 @@
   <input type="integer" name="reps"> Reps to Be Performed </input>
   <br>
   <input type="text" name="body_region"> Part of Body Being Exercised </input>
+  <input type="hidden" id="hidden" name="_method" value="patch">
   <input type="submit" value="Submit">
 </form>
