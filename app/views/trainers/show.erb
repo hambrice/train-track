@@ -1,2 +1,12 @@
 <h2> Welcome, <%=@trainer.first_name%> </h2>
-<p> Here are your current clients </o>
+<% if !@trainer.clients.empty? %>
+<p> Here are your current clients </p>
+<ul>
+<% @trainer.clients.each do |client| %>
+<li> <%=client.name%> </li>
+<li> <%=client.plan.name%> </li>
+<% end %>
+<% else %>
+<p> Oh no, you have no clients! </p>
+<p> You can add new clients by their email address by clicking here </p>
+<% end %>
