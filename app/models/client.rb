@@ -1,5 +1,5 @@
 class Client < ActiveRecord::Base
-  has_one :plan
+  has_many :plans
   belongs_to :trainer
 
   has_secure_password
