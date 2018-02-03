@@ -1,13 +1,9 @@
-<form method='POST' action='/exercises/new'>
+<form method='POST' action='/plans'>
   <input type="text" name="title"> Plan Title </input>
   <br>
   <% Exercise.all.each do |exercise| %>
-  <input type="checkbox" name="exercises[]" value="<%exercise.id%>"> exercise.title </input>
+  <input type="checkbox" name="exercises[]" value="<%exercise.id%>"> <%=exercise.title%> </input>
+  <% end %>
   <br>
-  <input type="integer" name="sets"> Sets to Be Performed </input>
-  <br>
-  <input type="integer" name="reps"> Reps to Be Performed </input>
-  <br>
-  <input type="text" name="body_region"> Part of Body Being Exercised </input>
   <input type="submit" value="Submit">
 </form>
