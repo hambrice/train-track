@@ -1,4 +1,4 @@
-require 'config/environment'
+require './config/environment'
 require 'pry'
 
 class ApplicationController < Sinatra::Base
@@ -15,6 +15,10 @@ end
 
   get '/' do
     erb :'/application/index'
+  end
+
+  get '/login' do
+    erb :'/application/login'
   end
 
 end

@@ -14,7 +14,6 @@ gem 'bcrypt'
 gem 'pry'
 
 group :test do
-  gem 'pry'
   gem 'pry-nav'
   gem 'rack-test'
   gem 'database_cleaner', git: 'https://github.com/bmabey/database_cleaner.git'
