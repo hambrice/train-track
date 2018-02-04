@@ -12,7 +12,10 @@
   <br>
   <input type="integer" name="reps"> Reps to Be Performed </input>
   <br>
-  <input type="text" name="body_region"> Part of Body Being Exercised </input>
+  <p> Body Region </p>
+  <%["Chest", "Shoulders", "Back", "Biceps", "Triceps", "Abs", "Legs", "Glutes"].each do |region|%>
+  <input type="radio" name="body_region" value="<%=region%>" <%= 'checked' if @exercise.body_region == region%>><%=region%></input>
+  <% end %>
   <input type="hidden" id="hidden" name="_method" value="patch">
   <input type="submit" value="Submit">
 </form>

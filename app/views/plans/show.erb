@@ -1,4 +1,6 @@
-<%= @plan.trainer.name %>
-<% @plan.exercises.each do |exercise| %>
+<h2><%= @plan.client.name %>'s Plan </h2>
+<p> Created by <%= @plan.trainer.name %></p>
+<h3> Monday </h3>
+<% @plan.scheduler("Monday"e2).each do |exercise| %>
 <%=exercise.title %>
 <% end %>

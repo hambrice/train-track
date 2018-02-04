@@ -7,9 +7,13 @@
 <form method='POST' action='/plans'>
   <input type="text" name="title"> Plan Title </input>
   <br>
+
+  <%["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].each do |day| %>
+<h3><%= day %></h3>
   <% Exercise.all.each do |exercise| %>
-  <input type="checkbox" name="exercises[]" value="<%=exercise.id%>"> <%=exercise.title%> </input>
+  <input type="checkbox" name="<%=day%>[exercises][]" value="<%=exercise.id%>"> <%=exercise.title%>: <%=exercise.sets_reps%> </input>
   <br>
+  <% end %>
   <% end %>
   <br>
   <input type="submit" value="Submit">

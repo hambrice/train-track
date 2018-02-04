@@ -1,7 +1,7 @@
 require 'pry'
 class Exercise < ActiveRecord::Base
-  has_many :exercise_plans
-  has_many :plans, through: :exercise_plans
+  has_many :exercise_schedules
+  has_many :schedules, through: :exercise_schedules
 
   def sets_reps
     "#{self.sets} sets of #{self.reps} repetitions"

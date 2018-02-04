@@ -13,7 +13,6 @@ class PlansController < ApplicationController
     if session[:client_id] != nil
       Client.find(session[:client_id]).plan = @plan
     end
-
     erb :'/plans/show'
   end
 
@@ -21,4 +20,11 @@ class PlansController < ApplicationController
     session[:client_id] = params[:id]
     erb :'/plans/new'
   end
+
+  get '/plans/:id2' do
+    @plan = Plan.find(params[:id2])
+    erb :'/plans/show'
+  end
+
+
 end
