@@ -8,5 +8,10 @@
   <input type="integer" name="reps"> Reps to Be Performed </input>
   <br>
   <input type="text" name="body_region"> Part of Body Being Exercised </input>
+<p> Days of Week to Be Performed </p>
+<%["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].each do |day| %>
+<input type="checkbox" name="schedule[]" value="<%=day%>"><%=day%></input>
+<% end %>
+
   <input type="submit" value="Submit">
 </form>

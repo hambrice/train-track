@@ -7,7 +7,8 @@ class ExercisesController < ApplicationController
   end
 
   post '/exercises/new' do
-    @exercise = Exercise.create(title: params["title"], description: params["description"], sets: params["sets"], reps: params["reps"], body_region: params["body_region"])
+    schedule = params["schedule"].join(", ")
+    @exercise = Exercise.create(title: params["title"], description: params["description"], sets: params["sets"], reps: params["reps"], body_region: params["body_region"], schedule: schedule)
     redirect "/exercises/#{@exercise.id}"
   end
 
