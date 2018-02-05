@@ -10,10 +10,19 @@
 
   <%["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].each do |day| %>
 <h3><%= day %></h3>
-  <% Exercise.all.each do |exercise| %>
-  <input type="checkbox" name="<%=day%>[exercises][]" value="<%=exercise.id%>"> <%=exercise.title%>: <%=exercise.sets_reps%> </input>
-  <br>
+<p> Designate as rest day </p>
+<%["Chest", "Shoulders", "Back", "Biceps", "Triceps", "Abs", "Legs", "Glutes"].each do |region|%>
+  <details>
+    <summary><%=region%></summary>
+      <% Exercise.all.each do |exercise| %>
+        <% if exercise.body_region == region.downcase %>
+          <input type="checkbox" name="<%=day%>[exercises][]" value="<%=exercise.id%>"> <%=exercise.title%>: <%=exercise.sets_reps%> </input>
+          <br>
+        <% end %>
+      <% end %>
+  </details>
   <% end %>
+
   <% end %>
   <br>
   <input type="submit" value="Submit">
