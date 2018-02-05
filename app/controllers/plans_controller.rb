@@ -4,7 +4,8 @@ class PlansController < ApplicationController
     erb :'/plans/new'
   end
 
-  post '/plans' do
+  post '/plans/:id' do
+    #display message that exercise or rest must be selected
     @plan = Plan.create(title: params["title"])
     ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].each do |day|
       schedule = Schedule.new(day: day)
@@ -36,4 +37,14 @@ class PlansController < ApplicationController
     erb :'/plans/edit'
   end
 
+  patch '/plans/:id' do
+    @plan = Client.find(params[:id]).plan
+    @plan.schedules.each do |schedule|
+      schedule.exercises.clear
+      params[schedule.day]["exercises"].each do |exercise|
+        schedule.exercises << Exercise.find(exercise)
+      end
+    end
+    redirect "/plans/#{@plan.id}"
+  end
 end
