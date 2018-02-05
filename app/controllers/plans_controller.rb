@@ -23,6 +23,7 @@ class PlansController < ApplicationController
   get '/plans/:id/new' do
     session[:client_id] = params[:id]
     erb :'/plans/new'
+    #fix this whole client/plan id stuff
   end
 
   get '/plans/:id2' do
@@ -30,5 +31,9 @@ class PlansController < ApplicationController
     erb :'/plans/show'
   end
 
+  get '/plans/id/edit' do
+    @plan = Client.find(params[:id]).plan
+    erb :'/plans/edit'
+  end
 
 end
