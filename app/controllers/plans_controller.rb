@@ -1,13 +1,17 @@
 class PlansController < ApplicationController
-
+@days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
   get '/plans/new' do
     erb :'/plans/new'
   end
 
   post '/plans' do
     @plan = Plan.create(title: params["title"])
-    params["exercises"].each do |exercise|
-      @plan.exercises << Exercise.find(exercise)
+    ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].each do |day|
+      schedule = Schedule.new(day: day)
+      params[day]["exercises"].each do |exercise|
+        schedule.exercises << Exercise.find(exercise)
+      end
+      @plan.schedules << schedule
     end
     @plan.trainer = Trainer.find(session[:user_id])
     if session[:client_id] != nil

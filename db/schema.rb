@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 6) do
     t.integer "client_id"
   end
 
-  create_table "schedule", force: :cascade do |t|
+  create_table "schedules", force: :cascade do |t|
     t.string "day"
     t.integer "plan_id"
   end

@@ -1,6 +1,8 @@
 <h2><%= @plan.client.name %>'s Plan </h2>
 <p> Created by <%= @plan.trainer.name %></p>
-<h3> Monday </h3>
-<% @plan.scheduler("Monday"e2).each do |exercise| %>
-<%=exercise.title %>
+<%@plan.schedules.each do |schedule| %>
+  <h3><%=schedule.day%> </h3>
+    <%schedule.exercises.each do |exercise|%>
+      <p><%=exercise.title %>: <%=exercise.sets_reps%></p>
+    <% end %>
 <% end %>
