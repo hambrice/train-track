@@ -31,7 +31,7 @@ class PlansController < ApplicationController
     erb :'/plans/show'
   end
 
-  get '/plans/id/edit' do
+  get '/plans/:id/edit' do
     @plan = Client.find(params[:id]).plan
     erb :'/plans/edit'
   end

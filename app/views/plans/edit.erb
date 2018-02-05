@@ -1,16 +1,16 @@
 <form method='POST' action='/plans'>
-  <input type="text" name="title"> Plan Title </input>
+  <input type="text" name="title"> <%=@plan.title%> </input>
   <br>
 
-  <%["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].each do |day| %>
-<h3><%= day %></h3>
+  <%@plan.schedules.each do |schedule| %>
+<h3><%= schedule.day %></h3>
 <p> Designate as rest day </p>
 <%["Chest", "Shoulders", "Back", "Biceps", "Triceps", "Abs", "Legs", "Glutes"].each do |region|%>
   <details>
     <summary><%=region%></summary>
       <% Exercise.all.each do |exercise| %>
         <% if exercise.body_region == region.downcase %>
-          <input type="checkbox" name="<%=day%>[exercises][]" value="<%=exercise.id%>"> <%=exercise.title%>: <%=exercise.sets_reps%> </input>
+          <input type="checkbox" name="<%=schedule.day%>[exercises][]" value="<%=exercise.id%>" <%='checked' if schedule.exercises.include?(exercise)%>  > <%=exercise.title%>: <%=exercise.sets_reps%> </input>
           <br>
         <% end %>
       <% end %>
