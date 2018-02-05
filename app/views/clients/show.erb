@@ -1,2 +1,14 @@
-<h2> Welcome, <%=@client.first_name%> </h2>
-<p> Your trainer is working on your track! </p>
+<h2> Welcome, <%=@client.first_name%>! </h2>
+<h3> Your trainer is: <%=@client.trainer.name%> </h3>
+<%if @client.plan != nil %>
+  <h4> Here's your current plan! </h4>
+  <%@client.plan.schedules.each do |schedule| %>
+    <h3><%=schedule.day%> </h3>
+      <%schedule.exercises.each do |exercise|%>
+        <p><%=exercise.title %>: <%=exercise.sets_reps%></p>
+      <% end %>
+  <% end %>
+<% else %>
+<p> Your trainer is hard at work building your track! If you have any questions, you can try sending them an email!</p>
+<%=@client.trainer.email%>
+<% end %>
