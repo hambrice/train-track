@@ -1,5 +1,10 @@
 
-  <details>
-    <summary>See More</summary>
-    This text will be hidden if your browser supports it.
-  </details>
+<%Trainer.all.each do |trainer|%>
+<%=trainer.name %>
+<br>
+<%end%>
+<br>
+<%Client.all.each do |client|%>
+<%=client.name %>
+<br>
+<%end%>

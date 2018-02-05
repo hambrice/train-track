@@ -5,16 +5,21 @@
   <% @trainer.clients.each do |client| %>
     <% if client.plan != nil %>
       <li> <%=client.name%> </li>
-      <li> <a href='/plans/<%=client.plan.id%>'><%=client.plan.title%> </a></li>
+     <a href='/plans/<%=client.plan.id%>'>See current plan </a>
+     <br>
+     <br>
     <% end %>
   <% end %>
 </ul>
   <p> Here are your current clients without plans </p>
   <ul>
   <% @trainer.clients.each do |client| %>
+    <% if client.plan == nil %>
+
       <li> <%=client.name%> </li>
-      <p><a href='/plans/<%=client.id%>/new'> Make new plan! </a></p>
+      <a href='/plans/<%=client.id%>/new'> Make new plan! </a>
       <br>
+    <%end%>
   <% end %>
   </ul>
 <% else %>
