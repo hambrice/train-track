@@ -50,7 +50,7 @@ class PlansController < ApplicationController
 
   get '/plans/:id/delete' do
     @client = Client.find(params[:id])
-    @clien.plan = nil
+    @client.plan = nil
     redirect "/trainers/#{session[:user_id]}"
   end
 end

@@ -1,6 +1,4 @@
 <form method='POST' action='/plans/<%=@plan.client.id%>'>
-  <input type="text" name="title"> <%=@plan.title%> </input>
-  <br>
 
   <%@plan.schedules.each do |schedule| %>
 <h3><%= schedule.day %></h3>
@@ -9,7 +7,7 @@
   <details>
     <summary><%=region%></summary>
       <% Exercise.all.each do |exercise| %>
-        <% if exercise.body_region == region.downcase %>
+        <% if exercise.body_region == region %>
           <input type="checkbox" name="<%=schedule.day%>[exercises][]" value="<%=exercise.id%>" <%='checked' if schedule.exercises.include?(exercise)%>  > <%=exercise.title%>: <%=exercise.sets_reps%> </input>
           <br>
         <% end %>
