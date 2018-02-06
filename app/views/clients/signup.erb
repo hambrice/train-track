@@ -1,3 +1,7 @@
+<% if flash.has? (:message) %>
+<%= flash[:message] %>
+<% end %>
+
 <h2> Ready To Get Onboard? </h2>
 <form method='POST' action='/clients/show'>
   <input type="text" name="first_name">First name </input>

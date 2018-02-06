@@ -20,15 +20,20 @@ class ClientsController < ApplicationController
   end
 
   post '/clients/show' do
-    @client = Client.find_by(email: params["email"])
-     if @client == nil
-       redirect '/clients/failure1'
-    elsif @client.first_name != nil
-      redirect '/clients/failure2'
-    end
+    if !params["first_name"].empty? && !params["last_name"].empty? && !params["email"].empty? && !params["password"].empty?
+      @client = Client.find_by(email: params["email"])
+      if @client == nil
+        redirect '/clients/failure1'
+      elsif @client.first_name != nil
+        redirect '/clients/failure2'
+      end
     @client.update(first_name: params["first_name"], last_name: params["last_name"], password: params["password"])
     session[:user_id] = @client.id
     redirect "/clients/#{@client.id}"
+    else
+      flash[:message] = "Please fill in all areas!"
+      erb :'/clients/signup'
+    end
   end
 
   get '/clients/failure1' do
