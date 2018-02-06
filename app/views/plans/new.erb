@@ -1,16 +1,18 @@
-<% if session[:client_id] != nil %>
+
+
 <h2> You are building a new track for <%=Client.find(session[:client_id]).name %></h2>
-<% else %>
-<h2> You are building a new unassigned track </h2>
+<br>
+<br>
+<% if flash.has? (:message) %>
+<h3><%= flash[:message] %></h3>
 <% end %>
 
 <form method='POST' action="/plans/<%=session[:client_id]%>">
-  <input type="text" name="title"> Plan Title </input>
   <br>
 
   <%["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].each do |day| %>
 <h3><%= day %></h3>
-<p> Designate as rest day </p>
+<p><input type="checkbox" name="<%=day%>[rest]" value="true"> Designate as rest day </input></p>
 <%["Chest", "Shoulders", "Back", "Biceps", "Triceps", "Abs", "Legs", "Glutes"].each do |region|%>
   <details>
     <summary><%=region%></summary>

@@ -2,9 +2,14 @@
 <p> Created by <%= @plan.trainer.name %></p>
 <%@plan.schedules.each do |schedule| %>
   <h3><%=schedule.day%> </h3>
-    <%schedule.exercises.each do |exercise|%>
-      <p><%=exercise.title %>: <%=exercise.sets_reps%></p>
-    <% end %>
+  <%if schedule.rest? == true %>
+  <p> Rest day </p>
+  <% else %>
+  <%schedule.exercises.each do |exercise|%>
+    <p><%=exercise.title %>: <%=exercise.sets_reps%></p>
+  <% end %>
+  <% end %>
+
 <% end %>
 <a href='/plans/<%=@client.id%>/edit'> Edit plan </a>
 <a href='/plans/<%=@client.id%>/delete'> Delete plan </a>

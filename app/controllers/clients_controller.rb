@@ -31,7 +31,7 @@ class ClientsController < ApplicationController
       @client = Client.find_by(email: params["email"])
       if @client == nil
         redirect '/clients/failure1'
-      elsif @client.first_name != nil
+      elsif @client.first_name != "user"
         redirect '/clients/failure2'
       end
     @client.update(first_name: params["first_name"], last_name: params["last_name"], password: params["password"])
@@ -57,7 +57,7 @@ class ClientsController < ApplicationController
     #  redirect '/failure'
     #else
       @client = Client.find(params[:id])
-      redirect :'/clients/show'
+      erb :'/clients/show'
     #end
   end
 

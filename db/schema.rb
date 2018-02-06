@@ -34,7 +34,6 @@ ActiveRecord::Schema.define(version: 6) do
   end
 
   create_table "plans", force: :cascade do |t|
-    t.string "title"
     t.integer "trainer_id"
     t.integer "client_id"
   end
@@ -42,6 +41,7 @@ ActiveRecord::Schema.define(version: 6) do
   create_table "schedules", force: :cascade do |t|
     t.string "day"
     t.integer "plan_id"
+    t.boolean "rest?"
   end
 
   create_table "trainers", force: :cascade do |t|

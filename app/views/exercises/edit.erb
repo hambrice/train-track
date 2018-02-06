@@ -2,6 +2,11 @@
 <p> <%=@exercise.body_region%> </p>
 <p> <%=@exercise.description %> </p>
 <p> <%=@exercise.sets_reps%> </p>
+<br>
+<br>
+<% if flash.has? (:message) %>
+<h3><%= flash[:message] %></h3>
+<% end %>
 
 <form method='POST' action='/exercises/<%=@exercise.id%>'>
   <input type="text" name="title"> Exercise Title </input>

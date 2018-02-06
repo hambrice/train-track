@@ -6,23 +6,37 @@ class PlansController < ApplicationController
 
   post '/plans/:id' do
     #display message that exercise or rest must be selected
-    @plan = Plan.create(title: params["title"])
+    ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].each do |day|
+      if params[day] == nil
+        session[:error] = "input error"
+        redirect "/plans/#{params[:id]}/new"
+      end
+    end
+    @plan = Plan.create
     ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].each do |day|
       schedule = Schedule.new(day: day)
-      params[day]["exercises"].each do |exercise|
-        schedule.exercises << Exercise.find(exercise)
+      if params[day]["rest"] == "true"
+        schedule.update(rest?: true)
+
+      else
+        params[day]["exercises"].each do |exercise|
+          schedule.exercises << Exercise.find(exercise)
+        end
       end
       @plan.schedules << schedule
     end
     @plan.trainer = Trainer.find(session[:user_id])
-    if session[:client_id] != nil
-      Client.find(session[:client_id]).plan = @plan
-    end
+    @client = Client.find(params[:id])
+    @client.plan = @plan
     erb :'/plans/show'
   end
 
   get '/plans/:id/new' do
     check_access
+    if session[:error] == "input error"
+      flash[:message] = "Please make sure that every day has at least one exercise OR is designated a rest day!"
+      session[:error] = nil
+    end
     @client = Client.find(params[:id])
     if @client.plan != nil
       redirect "/plans/#{@client.id}"
@@ -41,6 +55,9 @@ class PlansController < ApplicationController
 
   get '/plans/:id/edit' do
     check_access
+    if session[:error] == "edit error"
+      flash[:message] = "Please make sure that every day has at least one exercise OR is designated a rest day!"
+    end
     @plan = Client.find(params[:id]).plan
     erb :'/plans/edit'
   end
@@ -49,11 +66,17 @@ class PlansController < ApplicationController
     @plan = Client.find(params[:id]).plan
     @plan.schedules.each do |schedule|
       schedule.exercises.clear
-      params[schedule.day]["exercises"].each do |exercise|
-        schedule.exercises << Exercise.find(exercise)
+      if params[schedule.day]["rest"] == "true"
+        schedule.update(rest?: true)
+
+      else
+        schedule.update(rest?: false)
+        params[schedule.day]["exercises"].each do |exercise|
+          schedule.exercises << Exercise.find(exercise)
+        end
       end
     end
-    redirect "/plans/#{@plan.id}"
+    redirect "/plans/#{@plan.client.id}"
   end
 
   get '/plans/:id/delete' do
@@ -62,4 +85,6 @@ class PlansController < ApplicationController
     @client.plan = nil
     redirect "/trainers/#{session[:user_id]}"
   end
+
+
 end
