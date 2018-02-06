@@ -3,7 +3,7 @@
   <p> Here are your current clients with plans </p>
   <ul>
   <% @trainer.clients.each do |client| %>
-    <% if client.plan != nil %>
+    <% if client.plan != nil && client.first_name != "user" %>
       <li> <%=client.name%> </li>
      <a href='/plans/<%=client.plan.id%>'>See current plan </a>
      <br>
@@ -14,7 +14,7 @@
   <p> Here are your current clients without plans </p>
   <ul>
   <% @trainer.clients.each do |client| %>
-    <% if client.plan == nil %>
+    <% if client.plan == nil && client.first_name != "user" %>
 
       <li> <%=client.name%> </li>
       <a href='/plans/<%=client.id%>/new'> Make new plan! </a>
@@ -27,3 +27,9 @@
 <% end %>
 <p> <a href='/clients/new'>You can add new clients by their email address by clicking here </p>
 <p><a href='/exercises/new'> You can add new exercises by clicking here</a> </p>
+
+<% Client.all.each do |client| %>
+  <% if client.first_name == "user" %>
+  <%= client.email %>
+  <% end %>
+  <% end %>
