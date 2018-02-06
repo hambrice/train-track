@@ -21,9 +21,10 @@ class ClientsController < ApplicationController
   end
 
   post '/clients/show' do
-    @client = Client.create(first_name: params["first_name"], last_name: params["last_name"], email: params["email"], password: params["password"])
+    @client = Client.find_by(email: params["email"])
+    @client.update(first_name: params["first_name"], last_name: params["last_name"], password: params["password"])
     session[:user_id] = @client.id
-    erb :'/application/login'
+    redirect "/clients/#{@client.id}"
   end
 
 
