@@ -1,5 +1,16 @@
 class ClientsController < ApplicationController
 
+  get '/clients/new' do
+    erb :'/clients/new'
+  end
+
+  post '/clients/new' do
+    @client = Client.create(email: params["email"])
+    @trainer = Trainer.find(session[:user_id])
+    @trainer.clients << @client
+    redirect "/trainers/#{@trainer.id}"
+  end
+
   get '/clients/:id' do
     @client = Client.find(params[:id])
     erb :'/clients/show'
@@ -15,9 +26,7 @@ class ClientsController < ApplicationController
     erb :'/application/login'
   end
 
-  get '/clients/new' do
-    erb :'/clients/new'
-  end
+
 
 
 end
