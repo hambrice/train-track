@@ -15,6 +15,9 @@ class ClientsController < ApplicationController
     erb :'/application/login'
   end
 
+  get '/clients/new' do
+    erb :'/clients/new'
+  end
 
 
 end
