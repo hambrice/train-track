@@ -25,7 +25,7 @@ end
 
   def check_access
     if !has_access?
-      redirect 'clients/failure2'
+      redirect '/failure'
     end
   end
 
@@ -36,6 +36,12 @@ end
 
   get '/login' do
     erb :'/application/login'
+  end
+
+  get '/logout' do
+    session[:user_id] = nil
+    session[:is_trainer] = nil
+    redirect '/'
   end
 
   get '/signup' do

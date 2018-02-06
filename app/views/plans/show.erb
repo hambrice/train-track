@@ -1,4 +1,4 @@
-<h2><%= @plan.client.name %>'s Plan </h2>
+<h2><%= @client.name %>'s Plan </h2>
 <p> Created by <%= @plan.trainer.name %></p>
 <%@plan.schedules.each do |schedule| %>
   <h3><%=schedule.day%> </h3>
@@ -6,6 +6,6 @@
       <p><%=exercise.title %>: <%=exercise.sets_reps%></p>
     <% end %>
 <% end %>
-<a href='/plans/<%=@plan.client.id%>/edit'> Edit plan </a>
-<a href='/plans/<%=@plan.client.id%>/delete'> Delete plan </a>
+<a href='/plans/<%=@client.id%>/edit'> Edit plan </a>
+<a href='/plans/<%=@client.id%>/delete'> Delete plan </a>
 <p><a href="/trainers/<%=session[:user_id]%>"> Return to main page </a></p>

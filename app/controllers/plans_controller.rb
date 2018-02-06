@@ -22,17 +22,25 @@ class PlansController < ApplicationController
   end
 
   get '/plans/:id/new' do
+    check_access
+    @client = Client.find(params[:id])
+    if @client.plan != nil
+      redirect "/plans/#{@client.id}"
+    end
     session[:client_id] = params[:id]
     erb :'/plans/new'
     #fix this whole client/plan id stuff
   end
 
-  get '/plans/:id2' do
-    @plan = Plan.find(params[:id2])
+  get '/plans/:id' do
+    check_access
+    @client = Client.find(params[:id])
+    @plan = @client.plan
     erb :'/plans/show'
   end
 
   get '/plans/:id/edit' do
+    check_access
     @plan = Client.find(params[:id]).plan
     erb :'/plans/edit'
   end
@@ -49,6 +57,7 @@ class PlansController < ApplicationController
   end
 
   get '/plans/:id/delete' do
+    check_access
     @client = Client.find(params[:id])
     @client.plan = nil
     redirect "/trainers/#{session[:user_id]}"

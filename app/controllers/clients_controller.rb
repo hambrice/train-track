@@ -2,6 +2,12 @@ class ClientsController < ApplicationController
 
   get '/clients/new' do
     check_access
+    @array = []
+     Client.all.each do |client|
+       if client.first_name == "user"
+         @array << client
+       end
+      end
     erb :'/clients/new'
   end
 
@@ -51,7 +57,7 @@ class ClientsController < ApplicationController
     #  redirect '/failure'
     #else
       @client = Client.find(params[:id])
-      erb :'/clients/show'
+      redirect :'/clients/show'
     #end
   end
 
