@@ -1,4 +1,7 @@
 <h2> Welcome, <%=@trainer.first_name%> </h2>
+<h3> <%=session[:user_id]%> </h3>
+<h3> <%=session[:is_trainer]%> </h3>
+
 <% if !@trainer.clients.empty? %>
   <p> Here are your current clients with plans </p>
   <ul>

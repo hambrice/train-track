@@ -1,6 +1,7 @@
 class ClientsController < ApplicationController
 
   get '/clients/new' do
+    check_access
     erb :'/clients/new'
   end
 
@@ -45,8 +46,13 @@ class ClientsController < ApplicationController
   end
 
   get '/clients/:id' do
-    @client = Client.find(params[:id])
-    erb :'/clients/show'
+  #  @params[:id] = params[:id]
+    #if
+    #  redirect '/failure'
+    #else
+      @client = Client.find(params[:id])
+      erb :'/clients/show'
+    #end
   end
 
 end

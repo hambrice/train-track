@@ -15,7 +15,7 @@
   <details>
     <summary><%=region%></summary>
       <% Exercise.all.each do |exercise| %>
-        <% if exercise.body_region == region.downcase %>
+        <% if exercise.body_region == region %>
           <input type="checkbox" name="<%=day%>[exercises][]" value="<%=exercise.id%>"> <%=exercise.title%>: <%=exercise.sets_reps%> </input>
           <br>
         <% end %>
