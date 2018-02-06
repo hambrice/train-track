@@ -12,6 +12,7 @@ gem 'shotgun'
 gem 'json', '>=1.8.3'
 gem 'bcrypt'
 gem 'pry'
+gem 'rack-flash3'
 
 group :test do
   gem 'pry-nav'
