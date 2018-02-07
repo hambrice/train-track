@@ -11,9 +11,8 @@ gem 'require_all'
 gem 'shotgun'
 gem 'json', '>=1.8.3'
 gem 'bcrypt'
-gem 'pry'
 gem 'rack-flash3'
-
+gem 'pry'
 group :test do
   gem 'pry-nav'
   gem 'rack-test'

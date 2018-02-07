@@ -6,7 +6,7 @@
   <p> Rest day </p>
   <% else %>
   <%schedule.exercises.each do |exercise|%>
-    <p><%=exercise.title %>: <%=exercise.sets_reps%></p>
+    <p><a href='/exercises/<%=exercise.id%>'><%=exercise.title %></a>: <%=exercise.sets_reps%></p>
   <% end %>
   <% end %>
 

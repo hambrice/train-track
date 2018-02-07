@@ -12,7 +12,7 @@
     <summary><%=region%></summary>
       <% Exercise.all.each do |exercise| %>
         <% if exercise.body_region == region %>
-          <input type="checkbox" name="<%=schedule.day%>[exercises][]" value="<%=exercise.id%>" <%='checked' if schedule.exercises.include?(exercise)%>  > <%=exercise.title%>: <%=exercise.sets_reps%> </input>
+          <input type="checkbox" name="<%=schedule.day%>[exercises][]" value="<%=exercise.id%>" <%='checked' if schedule.exercises.include?(exercise)%> ><a href='/exercises/<%=exercise.id%>' <%=exercise.title%></a>: <%=exercise.sets_reps%> </input>
           <br>
         <% end %>
       <% end %>
