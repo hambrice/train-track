@@ -15,4 +15,7 @@ Exercise.create(title: "Barbell Bench Press", description:"make it hurt", sets: 
 Exercise.create(title: "Squats", description: "ass to grass", sets: 5, reps:5, body_region:"Legs")
 trainer = Trainer.create(first_name: "Jacob", last_name: "Waterman", email: "jacob@gmail.com", password: "jacob")
 client1 = Client.create(first_name: "Taros", last_name: "Olivoman", email: "taros@gmail.com", password: "taros")
-trainer << client1
+trainer.clients << client1
+trainer2 = Trainer.create(first_name: "Josh", last_name: "MacFawn", email: "josh@gmail.com", password: "josh")
+client2 = Client.create(first_name: "Charger", last_name: "MacFawn", email: "charger@gmail.com", password: "charger")
+trainer2.clients << client2

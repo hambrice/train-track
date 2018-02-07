@@ -13,6 +13,7 @@ gem 'json', '>=1.8.3'
 gem 'bcrypt'
 gem 'rack-flash3'
 gem 'pry'
+
 group :test do
   gem 'pry-nav'
   gem 'rack-test'
