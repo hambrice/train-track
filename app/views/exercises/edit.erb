@@ -9,13 +9,13 @@
 <% end %>
 
 <form method='POST' action='/exercises/<%=@exercise.id%>'>
-  <input type="text" name="title"> Exercise Title </input>
+  <input type="text" name="title" value="<%=@exercise.title%>"> Exercise Title </input>
   <br>
-  <input type="text" name="description"> Exercise Instructions </input>
+  <textarea style="height:200px; width:200px" type="text" name="description" value="<%=@exercise.description%>"> <%=@exercise.description%> </textarea>
   <br>
-  <input type="integer" name="sets"> Sets to Be Performed </input>
+  <input type="integer" name="sets" value="<%=@exercise.sets%>"> Sets to Be Performed </input>
   <br>
-  <input type="integer" name="reps"> Reps to Be Performed </input>
+  <input type="integer" name="reps" value="<%=@exercise.reps%>"> Reps to Be Performed </input>
   <br>
   <p> Body Region </p>
   <%["Chest", "Shoulders", "Back", "Biceps", "Triceps", "Abs", "Legs", "Glutes"].each do |region|%>
