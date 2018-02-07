@@ -8,4 +8,8 @@
 <br>
 <a href='/exercises/new'> Add another exercise? </a>
 <br>
-<a href="/trainers/<%=session[:user_id]%>"> Return to main page </a>
+<% if session[:is_trainer] == true %>
+  <a href="/trainers/<%=session[:user_id]%>"> Return to main page </a>
+<% else %>
+  <a href="/clients/<%=session[:user_id]%>"> Return to main page </a>
+  <% end %>
