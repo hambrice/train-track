@@ -38,6 +38,9 @@ class PlansController < ApplicationController
       session[:error] = nil
     end
     @client = Client.find(params[:id])
+    if @client.trainer.id != session[:user_id]
+      redirect '/trainers/failure'
+    end
     if @client.plan != nil
       redirect "/plans/#{@client.id}"
     end
@@ -57,6 +60,10 @@ class PlansController < ApplicationController
     check_access
     if session[:error] == "edit error"
       flash[:message] = "Please make sure that every day has at least one exercise OR is designated a rest day!"
+    end
+    @client = Client.find(params[:id])
+    if @client.trainer.id != session[:user_id]
+      redirect '/trainers/failure'
     end
     @plan = Client.find(params[:id]).plan
     erb :'/plans/edit'

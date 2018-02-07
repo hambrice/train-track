@@ -11,6 +11,9 @@
   <% end %>
 
 <% end %>
-<a href='/plans/<%=@client.id%>/edit'> Edit plan </a>
-<a href='/plans/<%=@client.id%>/delete'> Delete plan </a>
+<%if @client.trainer.id == session[:user_id]%>
+  <a href='/plans/<%=@client.id%>/edit'> Edit plan </a>
+  <a href='/plans/<%=@client.id%>/delete'> Delete plan </a>
+<% end %>
+<br>
 <p><a href="/trainers/<%=session[:user_id]%>"> Return to main page </a></p>
