@@ -1,4 +1,8 @@
 <h2> Login to your account here! </h2>
+<% if flash.has? (:message)%>
+  <%=flash[:message]%>
+  <%end%>
+  <br>
 <form method='POST' action='/show'>
   <input type="text" name="email">E-mail </input>
   <br>
@@ -6,3 +10,4 @@
   <br>
   <input type="submit" value="Get Your Train On!">
 </form>
+<h3> <%=session[:error]%> </h3>

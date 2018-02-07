@@ -35,12 +35,21 @@ end
   end
 
   get '/login' do
+    if session[:error] == "password error"
+      session[:error] = nil
+      flash[:message] = "Sorry, that password is incorrect."
+    elsif session[:error] == "email error"
+      session[:error] = nil
+      flash[:message] = "Sorry, we can't find that email address."
+    end
     erb :'/application/login'
   end
 
   get '/logout' do
     session[:user_id] = nil
     session[:is_trainer] = nil
+    session[:error] = nil
+    flash[:message] = nil
     redirect '/'
   end
 
@@ -51,16 +60,25 @@ end
   post '/show' do
     if Client.find_by(email: params["email"]) != nil
       @client = Client.find_by(email: params["email"])
+      if @client.authenticate(params["password"]) == false
+        session[:error] = "password error"
+        redirect '/login'
+      end
       session[:user_id] = @client.id
       session[:is_trainer] = nil
       redirect "/clients/#{@client.id}"
     elsif Trainer.find_by(email: params["email"]) != nil
       @trainer = Trainer.find_by(email: params["email"])
+      if @trainer.authenticate(params["password"]) == false
+        session[:error] = "password error"
+        redirect '/login'
+      end
       session[:user_id] = @trainer.id
       session[:is_trainer] = true
       redirect "/trainers/#{@trainer.id}"
     else
-      erb :'clients/failure2'
+      session[:error] = "email error"
+      redirect '/login'
     end
 
   end

@@ -3,6 +3,7 @@
 <% if session[:user_id] != nil%>
   <a href="/clients/<%=session[:user_id]%>"> Click here to return to your home page. </a>
 <% else %>
+<p> Sorry, there was an error with your email or password. Please try again. </p>
   <a href="/login"> Click here to login. </a>
   <% end %>
 <h3><%=session[:is_trainer]%></h3>
