@@ -13,7 +13,6 @@ class ClientsController < ApplicationController
 
   post '/clients/new' do
     @client = Client.create(first_name: "user", last_name: "user", email: params["email"], password: "user")
-    #@client.update(first_name: nil, last_name: nil, email: params["email"], password: nil)
     @trainer = Trainer.find(session[:user_id])
     @trainer.clients << @client
     @trainer.save
@@ -39,7 +38,7 @@ class ClientsController < ApplicationController
     redirect "/clients/#{@client.id}"
     else
       flash[:message] = "Please fill in all areas!"
-      erb :'/clients/signup'
+      redirect '/clients/signup'
     end
   end
 
@@ -52,13 +51,8 @@ class ClientsController < ApplicationController
   end
 
   get '/clients/:id' do
-  #  @params[:id] = params[:id]
-    #if
-    #  redirect '/failure'
-    #else
       @client = Client.find(params[:id])
       erb :'/clients/show'
-    #end
   end
 
 end

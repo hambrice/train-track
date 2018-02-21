@@ -11,6 +11,7 @@ class TrainersController < ApplicationController
   end
 
   post '/trainers/show' do
+
     if !params["first_name"].empty? && !params["last_name"].empty? && !params["email"].empty? && !params["password"].empty?
       @trainer = Trainer.create(first_name: params["first_name"], last_name: params["last_name"], email: params["email"], password: params["password"])
       session[:user_id] = @trainer.id
@@ -18,7 +19,7 @@ class TrainersController < ApplicationController
       redirect "/trainers/#{@trainer.id}"
     else
       flash[:message] = "Please fill in all areas!"
-      erb :'/trainers/signup'
+      redirect '/trainers/signup'
     end
 
   end
