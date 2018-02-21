@@ -13,7 +13,10 @@
 <% end %>
 <%if @client.trainer.id == session[:user_id]%>
   <a href='/plans/<%=@client.id%>/edit'> Edit plan </a>
-  <a href='/plans/<%=@client.id%>/delete'> Delete plan </a>
+  <form method="POST" action="/plans/<%=@client.id%>">
+    <input type="hidden" id="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete plan">
+  </form>
 <% end %>
 <br>
 <p><a href="/trainers/<%=session[:user_id]%>"> Return to main page </a></p>

@@ -5,10 +5,11 @@ class PlansController < ApplicationController
   end
 
   post '/plans/:id' do
-    #display message that exercise or rest must be selected
+    @client = Client.find(params[:id])
+    redirect '/failure' unless @client.trainer.id == session[:user_id] && is_trainer?
     ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].each do |day|
       if params[day] == nil
-        session[:error] = "input error"
+        #session[:error] = "input error"
         redirect "/plans/#{params[:id]}/new"
       end
     end
@@ -28,7 +29,7 @@ class PlansController < ApplicationController
     @plan.trainer = Trainer.find(session[:user_id])
     @client = Client.find(params[:id])
     @client.plan = @plan
-    erb :'/plans/show'
+    redirect "/plans/#{@client.id}"
   end
 
   get '/plans/:id/new' do
@@ -46,7 +47,6 @@ class PlansController < ApplicationController
     end
     session[:client_id] = params[:id]
     erb :'/plans/new'
-    #fix this whole client/plan id stuff
   end
 
   get '/plans/:id' do
@@ -86,7 +86,7 @@ class PlansController < ApplicationController
     redirect "/plans/#{@plan.client.id}"
   end
 
-  get '/plans/:id/delete' do
+  delete '/plans/:id' do
     check_access
     @client = Client.find(params[:id])
     @client.plan = nil
