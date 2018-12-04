@@ -9,7 +9,7 @@ This Sinatra application creates a resource for trainers to create and implement
 ## Usage
 The the following line into terminal and follow the on-screen prompts.
 
-    $ cd vocab-quiz
+    $ cd train-track
     $ bundle install
     $ rake db:seed
     $ shotgun
