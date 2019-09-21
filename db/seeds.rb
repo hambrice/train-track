@@ -8,6 +8,9 @@
 # trainer.clients << client2
 # trainer.clients << client3
 # trainer.clients << client4
+Client.destroy_all
+Exercise.destroy_all
+Trainer.destroy_all
 Exercise.create(title: "Dumbbell Press", description: "Lie back on an incline bench with a dumbbell in each hand atop your thighs. The palms of your hands will be facing each other.<br><br>
 Then, using your thighs to help push the dumbbells up, lift the dumbbells one at a time so that you can hold them at shoulder width.<br><br>
 Once you have the dumbbells raised to shoulder width, rotate your wrists forward so that the palms of your hands are facing away from you. This will be your starting position.<br><br>

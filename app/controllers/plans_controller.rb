@@ -5,10 +5,11 @@ class PlansController < ApplicationController
   end
 
   post '/plans/:id' do
-    #display message that exercise or rest must be selected
+    @client = Client.find(params[:id])
+    redirect '/failure' unless @client.trainer.id == session[:user_id] && trainer?
     ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].each do |day|
       if params[day] == nil
-        session[:error] = "input error"
+        flash[:message] = "Please make sure that every day has at least one exercise OR is designated a rest day!"
         redirect "/plans/#{params[:id]}/new"
       end
     end
@@ -28,15 +29,11 @@ class PlansController < ApplicationController
     @plan.trainer = Trainer.find(session[:user_id])
     @client = Client.find(params[:id])
     @client.plan = @plan
-    erb :'/plans/show'
+    redirect "/plans/#{@client.id}"
   end
 
   get '/plans/:id/new' do
     check_access
-    if session[:error] == "input error"
-      flash[:message] = "Please make sure that every day has at least one exercise OR is designated a rest day!"
-      session[:error] = nil
-    end
     @client = Client.find(params[:id])
     if @client.trainer.id != session[:user_id]
       redirect '/trainers/failure'
@@ -46,7 +43,6 @@ class PlansController < ApplicationController
     end
     session[:client_id] = params[:id]
     erb :'/plans/new'
-    #fix this whole client/plan id stuff
   end
 
   get '/plans/:id' do
@@ -58,9 +54,6 @@ class PlansController < ApplicationController
 
   get '/plans/:id/edit' do
     check_access
-    if session[:error] == "edit error"
-      flash[:message] = "Please make sure that every day has at least one exercise OR is designated a rest day!"
-    end
     @client = Client.find(params[:id])
     if @client.trainer.id != session[:user_id]
       redirect '/trainers/failure'
@@ -72,6 +65,10 @@ class PlansController < ApplicationController
   patch '/plans/:id' do
     @plan = Client.find(params[:id]).plan
     @plan.schedules.each do |schedule|
+      if params[schedule.day] == nil
+        flash[:message] = "Please make sure that every day has at least one exercise OR is designated a rest day!"
+        redirect "/plans/#{params[:id]}/edit"
+      end
       schedule.exercises.clear
       if params[schedule.day]["rest"] == "true"
         schedule.update(rest?: true)
@@ -86,7 +83,7 @@ class PlansController < ApplicationController
     redirect "/plans/#{@plan.client.id}"
   end
 
-  get '/plans/:id/delete' do
+  delete '/plans/:id' do
     check_access
     @client = Client.find(params[:id])
     @client.plan = nil
